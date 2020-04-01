@@ -1,0 +1,19 @@
+:: La cuenca de la cascada
+<%
+window.story.state.socket.emit('room', window.passage.name);
+window.story.state.arrives = function(username, from) {
+    if (from === 'Una cueva detrás de una cascada') {
+        return username + ' emerge de detrás de la cascada.';
+    }
+    return false;
+};
+window.story.state.leaves = function(username, to) {
+    if (to === 'Una cueva detrás de una cascada') {
+        return username + ' entra a la cascada.';
+    }
+    return false;
+};
+%>
+Estás nadando en la cuenca de la cascada.
+
+[[Entrar a la cascada|Una cueva detrás de una cascada]]

@@ -1,0 +1,30 @@
+:: Una cueva detrás de una cascada
+<%
+var first_connect = false;
+if (!window.story.state.hasOwnProperty('socket')) {
+    first_connect = true;
+    $(document.body).append('<script src="/socket.io/socket.io.js"></script>');
+    $.getScript('multiplayer.js', function () {
+        console.log('Got the multiplayer stuff');
+        window.story.state.socket.emit('room', window.passage.name);
+    });
+}
+if (!first_connect) {
+    window.story.state.socket.emit('room', window.passage.name);
+}
+window.story.state.arrives = function(username, from) {
+    if (from === 'La cuenca de la cascada') {
+        return username + ' entra la cueva.';
+    }
+    return false;
+};
+window.story.state.leaves = function(username, to) {
+    if (to === 'La cuenca de la cascada') {
+        return username + ' se va por la cascada.';
+    }
+    return false;
+};
+%>
+Estás en una cueva pequeña detrás de una cascada. La luz de la fuera brilla a través de la cascada.
+
+[[Caminar por la cascada|La cuenca de la cascada]]
